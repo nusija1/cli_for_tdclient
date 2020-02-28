@@ -8,12 +8,12 @@ TD_API_KEY = "10574/6f3458aa29a065296977fdc5d06284fc8c6b3072"
 
 def validate_db(ctx=None, param=None):
     with tdclient.Client(apikey=TD_API_KEY) as client:
-        for db in client.databases():
-            try:
-                param == db.name
+        database_list = client.api.list_databases()
+        for value in database_list.items():
+            if param == value[0]:
                 return param
-            except KeyError:
-                click.BadParameter(ctx, param, 'Check db name')
+        if param != value[0]:
+            raise Exception('Check db name', ctx)
 
 
 def validate_engine(ctx=None, param=None):
@@ -32,7 +32,7 @@ def validate_engine(ctx=None, param=None):
               help="Use this parameter to add list of columns you want to query. //"
                    "Please use comma as a separator if you want to see more than i collumn. //"
                    "If nothing given - all columns will be returned.")
-@click.option("--engine", "-e", callback=validate_engine)
+@click.option("--engine", "-e", callback=validate_engine, default="presto")
 @click.option("--min_time", "-m", required=False,
               help="minimum timestamp ​'min_time'​ in unix timestamp or ​NULL")
 @click.option("--max_time", "-M", required=False,
@@ -58,19 +58,24 @@ def db_connect(db_name, table_name, engine=None, column=None, min_time=None, max
             set(column).issubset(existing_columns)
             column = ','.join(column)
             print("Your column param is ok: {}".format(column))
+        elif "*" in column:
+            column = ','.join(str(e) for e in existing_columns)
+            print("Your column param is ok: {}".format(column))
         else:
             raise Exception(
                 'Check your column param send correct name for column. This is correct list {} and this is what you have: {}'.format(
                     existing_columns, column))
         if min_time is None or min_time > max_time:
             min_time = 'NULL'
-            print('You set up min_time < max_time. We changed your min_time to NULL so you can get more correct data')
+            print(
+                'You set up min_time < max_time or None. We changed your min_time to NULL so you can get more correct data')
         else:
             min_time = min_time
             print('Your min_time =' + min_time)
         if max_time is None or max_time < min_time:
             max_time = 'NULL'
-            print('You set up max_time < min_time. We changed your max_time to NULL so you can get more correct data')
+            print(
+                'You set up max_time < min_time or None. We changed your max_time to NULL so you can get more correct data')
         else:
             max_time = max_time
             print('Your max_time =' + max_time)
