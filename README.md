@@ -1,26 +1,19 @@
 
 I was following this article for seting up env and develop:
 https://towardsdatascience.com/how-to-setup-an-awesome-python-environment-for-data-science-or-anything-else-35d358cc95d5
+
 And this one as How-to for CLI coding:
 https://towardsdatascience.com/how-to-write-python-command-line-interfaces-like-a-pro-f782450caf0d
-
-
-
 ## **Pre-conditions**
-
-
 Setup python 3.7+
 Setup venv, you can use this: https://docs.python-guide.org/dev/virtualenvs/
-
-
 ## Setup
-
  1. git clone code of this tool to a directory you use for saving
     projects
  2. Install poetry through pip. You will find poetry in
     ~/.poetry/bin and can add it to your .bashrc as export
     PATH=$HOME/.poetry/bin:$PATH
- 3. pip install poetry
+pip install poetry
 Use next  command below -> with this, the virutal environemnts created by poetry are located within the project. Helpful for ides like pycharm
 ```poetry config settings.virtualenvs.in-project true```
  4. Change to the directory where you cloned this project into
