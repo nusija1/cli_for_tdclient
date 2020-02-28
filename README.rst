@@ -5,37 +5,34 @@ And this one as How-to for CLI coding:
 https://towardsdatascience.com/how-to-write-python-command-line-interfaces-like-a-pro-f782450caf0d
 
 
-**Pre-conditions**
+
+## **Pre-conditions**
+
+
 Setup python 3.7+
 Setup venv, you can use this: https://docs.python-guide.org/dev/virtualenvs/
 
-Setup:
 
-git clone code of this tool to a directory you use for saving projects
+## Setup
 
-# Install poetry through pip. You will find poetry in ~/.poetry/bin and can add it to your .bashrc as
-
-# export PATH=$HOME/.poetry/bin:$PATH
-
-```pip install poetry```
-
-# With this, the virutal environemnts created by poetry are located within the project. Helpful for ides like pycharm
+ 1. git clone code of this tool to a directory you use for saving
+    projects
+ 2. Install poetry through pip. You will find poetry in
+    ~/.poetry/bin and can add it to your .bashrc as export
+    PATH=$HOME/.poetry/bin:$PATH
+ 3. pip install poetry
+Use next  command below -> with this, the virutal environemnts created by poetry are located within the project. Helpful for ides like pycharm
 ```poetry config settings.virtualenvs.in-project true```
-
-# Change to the directory where you cloned this project into
+ 4. Change to the directory where you cloned this project into
 ```cd cli_for_tdclient # The folder that you've clone the repo into```
-
-# Install all dependencies. This might take a time as it creates the virutal environments
-poetry install
-
-In the pycharm:
-
+ 5. Install all dependencies. This might take a time as it creates the virutal environments
+ ```poetry install ```
+## In the pycharm:
 Go to Preferences | Project: cli_for_tdclient | Project Interpreter and choose virtual env which was set up by poetry for you.
+## Usage:
 
-
-Usage:
 Activate virtual env ```source .venv/bin/activate```
-Now from terminal you can work with cli using python:
+ Now from terminal you can work with cli using python:
 
 * python3 cli_for_tdclient/cli_for_tdclient.py -d nina -t test --limit 1 -e "presto"
 Result: tdclient.errors.NotFoundError: Table 'nina.test' does not exist
