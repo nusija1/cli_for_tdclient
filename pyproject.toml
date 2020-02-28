@@ -1,15 +1,16 @@
 [tool.poetry]
-name = "cli-tutorial"
+name = "cli_for_tdclient"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "Cli tool for issue query in Treasure Data DB using API and tdclient for python"
+authors = ["nina4sasha@gmail.com"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
 click = "^7.0"
 funcy = "^1.14"
 td-client = "^1.2"
-certifi = "^2019.11"
+pandas = "^1.0.1"
+tabulate = "^0.8.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
